@@ -12,7 +12,7 @@
 // Pin definitions
 #define LED_FILTER PIN_PA01
 #define LED_BLOCKED PIN_PA00
-#define LED_ERR PIN_PA19
+#define LED_ERR PIN_PA19 // Works on V15, showing ERR
 
 //Battery charge/discharge indicators
 #define LED_BAT_LO PIN_PA25
@@ -20,7 +20,8 @@
 #define LED_BAT_HI PIN_PA18
 
 //- seems to go to Q3 on the charger inlet side of things, push it high to accept a charge
-#define ENABLE_CHARGE_PIN PIN_PA02 
+//#define ENABLE_CHARGE_PIN PIN_PA02 // For V10
+#define ENABLE_CHARGE_PIN PIN_PA01 // For V15 & V11 charging confirmed
 
 //PA28 appears to be ALERT pin from the BQ7693
 #define BQ7693_ALERT_PIN PIN_PA28
@@ -42,8 +43,12 @@
 
 //18650 cell temperature limits from Molicell datasheet.
 #define MAX_PACK_TEMPERATURE 60				//'C - if pack temperature greater than this, no charge/discharge allowed.
-#define MIN_PACK_CHARGE_TEMP 0				//'C - if less than this, no charge.
-#define MIN_PACK_DISCHARGE_TEMP -40			//'C - if less than this, no discharge
+//#define MIN_PACK_CHARGE_TEMP 0				//'C - if less than this, no charge.
+//#define MIN_PACK_DISCHARGE_TEMP -40			//'C - if less than this, no discharge
+#define MIN_PACK_CHARGE_TEMP -300				//'C - if less than this, no charge.
+#define MIN_PACK_DISCHARGE_TEMP -400			//'C - if less than this, no discharge
+// Limits disabled, as V15 & V11 have 2xRTDs, now unknown where are assigned, therefore even max temp doesnt work
+// Do not charge battery when hot and not supervised! This is for Debug only for V15, battery pack outputs 24V
 
 #define IDLE_TIME 60 * 15 // Idle time in seconds. Pack will go into SHIP/deep sleep mode if nothing happens in this duration
 
